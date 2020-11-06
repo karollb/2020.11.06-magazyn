@@ -1,8 +1,7 @@
 package pl.edu.wszib.warehouse;
 
-import org.springframework.context.ApplicationContext;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pl.edu.wszib.warehouse.gui.GUI;
 import pl.edu.wszib.warehouse.gui.IGUI;
 
 public class App {

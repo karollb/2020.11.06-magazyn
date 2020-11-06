@@ -1,7 +1,5 @@
 package pl.edu.wszib.warehouse.database;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import pl.edu.wszib.warehouse.model.Product;
 
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.util.List;
 
 
 public class DataBase implements IDataBase {
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public DataBase() {
         this.products.add(new Product("Monitor", "abc123", 10));
