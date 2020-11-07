@@ -12,7 +12,7 @@ public class Product {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -20,7 +20,7 @@ public class Product {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(String code) {
@@ -28,7 +28,7 @@ public class Product {
     }
 
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(int quantity) {
