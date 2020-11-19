@@ -7,22 +7,23 @@ import pl.edu.wszib.warehouse.model.Product;
 import java.util.Scanner;
 
 
-public class GUI implements IGUI {
+public class GUI2 implements IGUI {
 
     private Scanner scanner = new Scanner(System.in);
 
 
     public IDataBase dataBase;
 
-    public GUI() {
+    public GUI2() {
     }
 
     public void showMainMenu() {
         System.out.println("--------------------");
-        System.out.println("1. Add products");
-        System.out.println("2. Take products");
-        System.out.println("3. Show all products");
-        System.out.println("4. Exit");
+        System.out.println("1. Create product");
+        System.out.println("2. Add products");
+        System.out.println("3. Take products");
+        System.out.println("4. Show all products");
+        System.out.println("5. Exit");
         System.out.println("--------------------");
 
 
@@ -30,19 +31,22 @@ public class GUI implements IGUI {
 
         switch (scanner.next()) {
             case "1":
+                createProduct();
+                showMainMenu();
+            case "2":
                 addProducts();
                 showMainMenu();
 
                 break;
-            case "2":
+            case "3":
                 takeProducts();
                 showMainMenu();
                 break;
-            case "3":
+            case "4":
                 showAllProducts();
                 showMainMenu();
                 break;
-            case "4":
+            case "5":
                 System.exit(0);
             default:
                 System.out.println("Wrong choose !!!");
@@ -51,6 +55,22 @@ public class GUI implements IGUI {
         }
     }
 
+    private void createProduct() {
+        System.out.println("Enter the product name:");
+        String name = scanner.next();
+
+        System.out.println("Enter the product code");
+        String code = scanner.next();
+
+        System.out.println("Enter the quantity of the product");
+        int quantity = scanner.nextInt();
+
+        if (this.dataBase.createProduct(name, code, quantity)) {
+            System.out.println("Added product success");
+        } else {
+            System.out.println("The specified product code exists");
+        }
+    }
 
     private void addProducts() {
         System.out.println("Enter the product code:");
