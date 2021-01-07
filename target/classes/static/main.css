@@ -1,0 +1,14 @@
+.product-box {
+    width: 80%;
+    margin: 15px auto;
+    border: 2px solid black;
+}
+.name-box {
+    font-size: 30px;
+    padding: 10px;
+}
+.product-data-box {
+    font-size: 20px;
+    display: inline-block;
+    margin-right: 50px;
+}
