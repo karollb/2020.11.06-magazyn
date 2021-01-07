@@ -1,18 +1,32 @@
 package pl.edu.wszib.warehouse.model;
 
 public class Product {
+    private int id;
     private String name;
     private String code;
     private int quantity;
 
-    public Product(String name, String code, int quantity) {
+
+    public Product(int id, String name, String code, int quantity) {
+        this.id = id;
         this.name = name;
         this.code = code;
         this.quantity = quantity;
     }
 
+    public Product() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -20,7 +34,7 @@ public class Product {
     }
 
     public String getCode() {
-        return this.code;
+        return code;
     }
 
     public void setCode(String code) {
@@ -28,7 +42,7 @@ public class Product {
     }
 
     public int getQuantity() {
-        return this.quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
@@ -38,7 +52,8 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 ", quantity=" + quantity +
                 '}';

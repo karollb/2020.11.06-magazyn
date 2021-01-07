@@ -13,18 +13,40 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <dependencies>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.5.RELEASE</version>
+    </parent>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.2.10.RELEASE</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.22</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.26.Final</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -33,6 +55,10 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
