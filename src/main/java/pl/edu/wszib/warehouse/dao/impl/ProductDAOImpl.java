@@ -21,7 +21,41 @@ public class ProductDAOImpl implements IProductDAO {
 
     @Override
     public Product getProductById(int id) {
+        String sql = "SELECT * FROM tproduct WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                return new Product(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("code"),
+                        resultSet.getInt("quantity"));
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return null;
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        String sql = "UPDATE tproduct SET name = ?, code = ?, quantity = ? WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2,product.getCode());
+            preparedStatement.setInt(3, product.getQuantity());
+            preparedStatement.setInt(4,product.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
