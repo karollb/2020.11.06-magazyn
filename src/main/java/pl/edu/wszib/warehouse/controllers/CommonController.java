@@ -32,13 +32,20 @@ public class CommonController {
     public String main(Model model) {
         model.addAttribute("products", this.productService.getAllProducts());
         model.addAttribute("isLogged", this.sessionObject.isLogged());
+        model.addAttribute("role", this.sessionObject.isLogged() ? this.sessionObject.getLoggedUser().getRole().toString() : null);
 
         return "main";
     }
 
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public String contact() {
+    public String contact(Model model) {
+        model.addAttribute("isLogged", this.sessionObject.isLogged());
+
+        if(!sessionObject.isLogged()) {
+            return "redirect:/login";
+        }
+
         return "contact";
     }
 
