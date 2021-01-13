@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.edu.wszib.warehouse.model.User;
+import pl.edu.wszib.warehouse.services.IProductService;
 import pl.edu.wszib.warehouse.services.IUserService;
 import pl.edu.wszib.warehouse.session.SessionObject;
 
@@ -18,12 +19,16 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    IProductService productService;
+
     @Resource
     SessionObject sessionObject;
 
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(Model model) {
-        if(this.sessionObject.isLogged()) {
+        if (this.sessionObject.isLogged()) {
             return "redirect:/main";
         }
         model.addAttribute("userModel", new User());
@@ -34,7 +39,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@ModelAttribute User user) {
         this.userService.authenticate(user);
-        if(this.sessionObject.isLogged()) {
+        if (this.sessionObject.isLogged()) {
             return "redirect:/main";
         }
         return "redirect:/login";

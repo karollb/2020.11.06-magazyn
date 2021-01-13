@@ -8,5 +8,7 @@ public interface IProductDAO {
     List<Product> getAllProducts();
     void updateProduct(Product product);
     Product getProductById(int id);
+    boolean addNewProduct(Product product);
+    Product getProductByCode(String code);
 
 }

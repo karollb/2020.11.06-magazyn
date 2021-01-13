@@ -16,7 +16,12 @@
             <div class="product-data-box">
                 <div th:text="'Kod produktu: ' + ${product.code}"></div>
                 <div th:text="'Ilość: ' + ${product.quantity}"></div>
+
+
             </div>
+            <a th:if="${role == 'ADMIN'}" th:href="@{/edit/{id}(id=${product.id})}" class="edit-button"></a>
+            <a th:if="${role == 'USER'}" th:href="@{/subtractProduct/{id}(id=${product.id})}" class="subtract-button"></a>
+            <a th:if="${role == 'USER'}" th:href="@{/addProduct/{id}(id=${product.id})}" class="add-button"></a>
         </div>
     </th:block>
 </div>

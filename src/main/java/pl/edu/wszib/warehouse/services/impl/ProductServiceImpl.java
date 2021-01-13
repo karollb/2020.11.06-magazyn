@@ -34,4 +34,30 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> getAllProducts() {
         return this.productDAO.getAllProducts();
     }
+
+    @Override
+    public boolean addNewProduct(Product product) {
+
+        if(this.productDAO.getProductByCode(product.getCode())!=null) {
+            return false;
+        }
+        return this.productDAO.addNewProduct(product);
+
+    }
+
+    @Override
+    public boolean updateProductQuantity(int id, int quantity) {
+        Product productFromDB = productDAO.getProductById(id);
+
+
+        if(productFromDB.getQuantity()<quantity) {
+            return false;
+        }
+        productFromDB.setQuantity(productFromDB.getQuantity()-quantity);
+        productDAO.updateProduct(productFromDB);
+        return true;
+
+
+
+    }
 }

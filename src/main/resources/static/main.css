@@ -12,3 +12,32 @@
     display: inline-block;
     margin-right: 50px;
 }
+.subtract-button {
+    background-image: url("subtract.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+}
+.add-button {
+    background-image: url("add.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+
+}
+.edit-button {
+    background-image: url("edit.png");
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background-size: contain;
+    float: right;
+    margin-top: -20px;
+
+}

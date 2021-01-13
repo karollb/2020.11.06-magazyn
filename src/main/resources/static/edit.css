@@ -26,3 +26,18 @@
     color: white;
     background-color: black;
 }
+
+#error {
+    color: red;
+    font-size: 26px;
+    text-align: center;
+}
+.text {
+    font-size: 30px;
+    text-align: center;
+    margin: 15px auto;
+    display: block;
+    color: blue;
+
+
+}

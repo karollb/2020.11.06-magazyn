@@ -28,7 +28,7 @@ public class ProductDAOImpl implements IProductDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return new Product(resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("code"),
@@ -43,14 +43,35 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
+    public Product getProductByCode(String code) {
+        String sql = "SELECT * FROM tproduct WHERE code = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setString(1, code);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Product(resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("code"),
+                        resultSet.getInt("quantity"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public void updateProduct(Product product) {
         String sql = "UPDATE tproduct SET name = ?, code = ?, quantity = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
             preparedStatement.setString(1, product.getName());
-            preparedStatement.setString(2,product.getCode());
+            preparedStatement.setString(2, product.getCode());
             preparedStatement.setInt(3, product.getQuantity());
-            preparedStatement.setInt(4,product.getId());
+            preparedStatement.setInt(4, product.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -61,8 +82,8 @@ public class ProductDAOImpl implements IProductDAO {
     @Override
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM tproduct;";
         try {
-            String sql = "SELECT * FROM tproduct;";
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -77,4 +98,24 @@ public class ProductDAOImpl implements IProductDAO {
         }
         return products;
     }
+
+    @Override
+    public boolean addNewProduct(Product product) {
+        String sql = "INSERT INTO tproduct(name, code, quantity) VALUES(?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setString(2, product.getCode());
+            preparedStatement.setInt(3, product.getQuantity());
+
+            preparedStatement.executeUpdate();
+            return true;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
