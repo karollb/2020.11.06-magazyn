@@ -80,6 +80,18 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM tproduct WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM tproduct;";

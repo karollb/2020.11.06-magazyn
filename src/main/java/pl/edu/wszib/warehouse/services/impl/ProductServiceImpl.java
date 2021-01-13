@@ -30,6 +30,9 @@ public class ProductServiceImpl implements IProductService {
 
 
 }
+
+
+
     @Override
     public List<Product> getAllProducts() {
         return this.productDAO.getAllProducts();
@@ -58,6 +61,12 @@ public class ProductServiceImpl implements IProductService {
         return true;
 
 
+
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        this.productDAO.deleteProduct(id);
 
     }
 }

@@ -112,6 +112,17 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete( @PathVariable int id) {
+        if(!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+            return "redirect:/login";
+        }
+        this.productService.deleteProduct(id);
+        return "redirect:/main";
+
+
+    }
+
 
 
 

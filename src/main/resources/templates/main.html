@@ -19,6 +19,7 @@
 
 
             </div>
+            <a th:if="${role == 'ADMIN'}" th:href="@{/delete/{id}(id=${product.id})}"class="delete-button"></a>
             <a th:if="${role == 'ADMIN'}" th:href="@{/edit/{id}(id=${product.id})}" class="edit-button"></a>
             <a th:if="${role == 'USER'}" th:href="@{/subtractProduct/{id}(id=${product.id})}" class="subtract-button"></a>
             <a th:if="${role == 'USER'}" th:href="@{/addProduct/{id}(id=${product.id})}" class="add-button"></a>
