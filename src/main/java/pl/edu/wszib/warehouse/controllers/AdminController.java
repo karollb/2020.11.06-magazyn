@@ -39,7 +39,7 @@ public class AdminController {
         model.addAttribute("isLogged", this.sessionObject.isLogged());
         model.addAttribute("role", this.sessionObject.isLogged() ? this.sessionObject.getLoggedUser().getRole().toString() : null);
 
-        if(!this.sessionObject.isLogged()) {
+        if (!this.sessionObject.isLogged()) {
             return "redirect:/login";
         }
         return "register";
@@ -60,7 +60,7 @@ public class AdminController {
 
         }
 
-        if(this.userService.register(registrationModel)) {
+        if (this.userService.register(registrationModel)) {
             return "redirect:/main";
         } else {
             this.sessionObject.setInfo("login zajęty !!");
@@ -70,16 +70,19 @@ public class AdminController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editForm(@PathVariable int id, Model model) {
+        if (!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+            return "redirect:/login";
+        }
         Product product = this.productService.getProductById(id);
         model.addAttribute("product", product);
-        model.addAttribute("isLogged",this.sessionObject.isLogged());
+        model.addAttribute("isLogged", this.sessionObject.isLogged());
         model.addAttribute("role", this.sessionObject.isLogged() ? this.sessionObject.getLoggedUser().getRole().toString() : null);
         return "edit";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String edit(@ModelAttribute Product product) {
-        if(!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+        if (!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
             return "redirect:/login";
         }
         this.productService.updateProduct(product);
@@ -89,6 +92,9 @@ public class AdminController {
 
     @RequestMapping(value = "/addNewProduct", method = RequestMethod.GET)
     public String addNewProductForm(Model model) {
+        if (!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+            return "redirect:/login";
+        }
         model.addAttribute("product", new Product());
         model.addAttribute("isLogged", sessionObject.isLogged());
         model.addAttribute("role", this.sessionObject.isLogged() ? this.sessionObject.getLoggedUser().getRole().toString() : null);
@@ -100,11 +106,14 @@ public class AdminController {
 
     @RequestMapping(value = "/addNewProduct", method = RequestMethod.POST)
     public String addNewProduct(@ModelAttribute Product product) {
-        if(product.getName().equals("")||product.getCode().equals("")) {
+        if (!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+            return "redirect:/login";
+        }
+        if (product.getName().equals("") || product.getCode().equals("")) {
             this.sessionObject.setInfo("Musisz podać nazwę oraz kod produktu !!");
             return "redirect:/addNewProduct";
         }
-        if(this.productService.addNewProduct(product)){
+        if (this.productService.addNewProduct(product)) {
             return "redirect:/main";
         } else {
             this.sessionObject.setInfo("Kod produktu zajęty !!");
@@ -113,8 +122,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete( @PathVariable int id) {
-        if(!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
+    public String delete(@PathVariable int id) {
+        if (!this.sessionObject.isLogged() || this.sessionObject.getLoggedUser().getRole() != User.Role.ADMIN) {
             return "redirect:/login";
         }
         this.productService.deleteProduct(id);
@@ -122,8 +131,6 @@ public class AdminController {
 
 
     }
-
-
 
 
 }

@@ -67,15 +67,12 @@ public class WarehouseController {
         if (!this.sessionObject.isLogged()) {
             return "redirect:/login";
         }
-        if (this.productService.updateProductQuantity(changeQuantityModel.getId(), changeQuantityModel.getQuantity()*-1)) {
+        if (this.productService.updateProductQuantity(changeQuantityModel.getId(), changeQuantityModel.getQuantity() * -1)) {
             return "redirect:/main";
         } else {
             return "redirect:/subtractProduct/{id}";
         }
     }
-
-
-
 
 
 }
