@@ -6,7 +6,6 @@ import pl.edu.wszib.warehouse.dao.IProductDAO;
 import pl.edu.wszib.warehouse.model.Product;
 import pl.edu.wszib.warehouse.services.IProductService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +22,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public void updateProduct(Product product) {
         Product productFromDB = this.productDAO.getProductById(product.getId());
+
         productFromDB.setName(product.getName());
         productFromDB.setCode(product.getCode());
         productFromDB.setQuantity(product.getQuantity());
@@ -44,7 +44,8 @@ public class ProductServiceImpl implements IProductService {
         if (this.productDAO.getProductByCode(product.getCode()) != null) {
             return false;
         }
-        return this.productDAO.addNewProduct(product);
+        this.productDAO.updateProduct(product);
+        return true;
 
     }
 
@@ -65,7 +66,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void deleteProduct(int id) {
-        this.productDAO.deleteProduct(id);
+        this.productDAO.deleteProduct(this.productDAO.getProductById(id));
 
     }
 

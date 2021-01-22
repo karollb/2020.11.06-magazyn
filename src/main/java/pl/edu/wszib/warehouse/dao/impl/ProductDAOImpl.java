@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class ProductDAOImpl implements IProductDAO {
 
     @Autowired
@@ -80,11 +80,11 @@ public class ProductDAOImpl implements IProductDAO {
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(Product product) {
         String sql = "DELETE FROM tproduct WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, product.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -111,7 +111,7 @@ public class ProductDAOImpl implements IProductDAO {
         return products;
     }
 
-    @Override
+
     public boolean addNewProduct(Product product) {
         String sql = "INSERT INTO tproduct(name, code, quantity) VALUES(?, ?, ?)";
         try {

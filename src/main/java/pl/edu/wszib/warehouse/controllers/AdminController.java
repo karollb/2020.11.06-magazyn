@@ -87,6 +87,7 @@ public class AdminController {
         }
         this.productService.updateProduct(product);
 
+
         return "redirect:/main";
     }
 
